@@ -15,10 +15,26 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "shell", inline: <<-SHELL
+    export JAVA_VERSION='8'
+    export JAVA_HOME='/usr/lib/jvm/java-8-oracle'
 
     sudo apt-get -y update
 
-    sudo apt-get -y install gcc make build-essential autoconf nasm
+    sudo apt-get -y install gcc make build-essential autoconf nasm unzip
+
+    # install Java 8
+    echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list
+    echo 'deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886
+
+    apt-get update
+
+    echo oracle-java-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+    apt-get install -y --force-yes oracle-java${JAVA_VERSION}-installer
+     update-java-alternatives -s java-8-oracle
+
+    # install maven
+    sudo apt-get install -y maven
 
     # install node
     curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
@@ -37,7 +53,7 @@ Vagrant.configure(2) do |config|
     sudo npm install -g jshint
 
     # install optipng-bin (to avoid npm install errors)
-    sudo npm install -g jshint
+    sudo npm install -g optipng-bin
 
   SHELL
 

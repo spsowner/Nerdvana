@@ -12,6 +12,7 @@ var autoprefixer = require('autoprefixer-stylus');
 var fileinclude = require('gulp-file-include');
 var plumber = require('gulp-plumber');
 var normalize = require('normalize');
+var httpProxy = require('http-proxy');
 
 var paths = {
     src: path.resolve(__dirname, '../js'),
@@ -23,6 +24,20 @@ var $ = require('gulp-load-plugins')({
 });
 
 var sGridPath = path.dirname(require.resolve('s-grid'));
+
+var proxy = httpProxy.createProxyServer({
+   target: 'http://localhost:8080'
+});
+
+// Proxy any api calls to the back end server
+var proxyMiddleware = function(req, res, next) {
+    var path = req.url.split('/');
+    if (/api/.test(path[1])) {
+        proxy.web(req, res);
+    } else {
+        next();
+    }
+};
 
 // Clean temp
 gulp.task('clean:tmp', function(done) {

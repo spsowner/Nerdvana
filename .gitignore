@@ -5,3 +5,8 @@ dist
 target
 build
 .vagrant
+.settings
+.project
+.DS_Store
+.classpath
+target
