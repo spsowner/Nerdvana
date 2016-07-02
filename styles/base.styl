@@ -1,0 +1,22 @@
+@import 'normalize'
+global-normalize()
+
+@import 's-grid-settings'
+@import 's-grid-functions'
+@import 's-grid-classes'
+
+@import 'vars'
+
+
+body
+    font-family 'Roboto', sans-serif
+    font-weight 300
+
+.container
+  center($maxContainerSize)
+  grid()
+
+
+@media only screen and (min-width 768px)
+    .container
+        margin-top 100px
