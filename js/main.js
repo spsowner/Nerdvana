@@ -5,6 +5,7 @@ import {Router, Route, IndexRoute, useRouterHistory} from 'react-router';
 import {createHashHistory} from 'history';
 import AppBar from 'material-ui/lib/app-bar';
 import NewQuestion from './components/pages/NewQuestion';
+import EnterSomeAnswers from './components/pages/EnterSomeAnswers';
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -51,6 +52,7 @@ ReactDom.render((
     >
         <Route path="/" component={App}>
             <IndexRoute component={NewQuestion}/>
+            <Route path="/answer" component={EnterSomeAnswers}/>
         </Route>
     </Router>
 ), document.getElementById('app'));
