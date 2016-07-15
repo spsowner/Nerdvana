@@ -6,6 +6,11 @@ import {createHashHistory} from 'history';
 import AppBar from 'material-ui/lib/app-bar';
 import NewQuestion from './components/pages/NewQuestion';
 import EnterSomeAnswers from './components/pages/EnterSomeAnswers';
+import Criteria from './components/pages/Criteria';
+import User from './components/pages/User';
+import Group from './components/pages/Group';
+import Question from './components/pages/Question';
+import SignUp from './components/pages/SignUp';
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -52,7 +57,13 @@ ReactDom.render((
     >
         <Route path="/" component={App}>
             <IndexRoute component={NewQuestion}/>
+            <Route path="/criteria" component={Criteria}/>
             <Route path="/answer" component={EnterSomeAnswers}/>
+            <Route path="/user/:id" component={User}/>
+            <Route path="/group/:id" component={Group}/>
+            <Route path="/question/:id" component={Question}/>
+            <Route path="/sign-up" component={SignUp}/>
+            <Route path="*" component={Criteria}/>
         </Route>
     </Router>
 ), document.getElementById('app'));

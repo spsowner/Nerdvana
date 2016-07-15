@@ -2,22 +2,13 @@ import React from 'react';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
-const NewQuestion = React.createClass({
+const Criteria = React.createClass({
 
     getInitialState() {
         return {
             question: '',
             isDisabled: true
         };
-    },
-
-    _onInputChange(event) {
-        var value = event.target.value;
-
-        this.setState({
-            question: value,
-            isDisabled: value.length === 0
-        });
     },
 
     render() {
@@ -29,21 +20,15 @@ const NewQuestion = React.createClass({
         return (
             <div className="container">
                 <header>
-                    <h1>Ask A Question</h1>
+                    <h1>Create Some Criteria</h1>
                 </header>
-                <TextField
-                    hintText="Enter a Question"
-                    fullWidth={true}
-                    value={this.state.question}
-                    onChange={this._onInputChange}/>
                 <div style={{width: '100%'}}>
+                    <div>TODO</div>
                     <RaisedButton
                         label="Next"
                         primary={true}
                         disabled={this.state.isDisabled}
-                        style={btnStyle}
-                        linkButton={true}
-                        href="/#/criteria" />
+                        style={btnStyle} />
                 </div>
             </div>
         );
@@ -51,4 +36,4 @@ const NewQuestion = React.createClass({
 
 });
 
-export default NewQuestion;
+export default Criteria;
