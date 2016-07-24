@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:encryption="http://www.jasypt.org/schema/encryption"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.jasypt.org/schema/encryption
+		http://www.jasypt.org/schema/encryption/jasypt-spring31-encryption-1.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<mvc:annotation-driven />
+
+	<!-- enable serving static content from the web root -->
+	<mvc:default-servlet-handler />
+	
+	<!-- enable @RequestMapping and auto-wire base-package beans -->
+	<context:component-scan base-package="com.sps" />
+	
+	<bean id="appProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="locations">
+			<list>
+				<value>classpath:nerdvana.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- decrypt encrypted property values with default algorithm PBEWithMD5AndDES -->
+	<encryption:encryptor-config id="encryptorConfig" password-sys-property-name="propEncryptionKey"/>
+	<encryption:string-encryptor id="propertyEncryptor" config-bean="encryptorConfig"/>
+	<bean class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="propertyEncryptor" />
+		<property name="properties" ref="appProperties"/>
+		<property name="ignoreUnresolvablePlaceholders" value="false"/>
+	</bean>
+	
+	<import resource="classpath:spring/security-config.xml" />
+	
+	<!-- context:annotation-config / -->
+
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    	<property name="driverClassName" value="${jdbc.driver}" />
+    	<property name="url" value="${jdbc.url}" />
+    	<property name="username" value="${jdbc.user}" />
+    	<property name="password" value="${jdbc.pwd}" />
+    </bean>
+	<!--	note: all beans in base package com.sps are auto-scanned
+			and don't need to be declared here -->
+    <bean class="com.sps.model.NerdvanaDao" />
+</beans>
