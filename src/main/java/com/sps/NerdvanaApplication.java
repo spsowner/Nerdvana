@@ -14,8 +14,7 @@ import com.sps.util.LogUtil;
 import com.sps.util.SystemOutLogger;
 
 /**
- * This class is an alternative to specifying <multipart-config> in web.xml.
- * @see http://spring.io/guides/gs/uploading-files/
+ * Configures the application.
  */
 @Configuration
 @EnableAutoConfiguration
