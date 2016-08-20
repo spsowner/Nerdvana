@@ -1,10 +1,14 @@
 package com.sps.model;
 
-public class AnswerDefinition {
+public class AnswerDefinition extends NerdvanaModel {
 	private int questionId;
-	private String name;
 	private float cost;
 	private int dataTypeId;
+	
+	public AnswerDefinition() {}
+	public AnswerDefinition(Integer id, String name) {
+		super(id, name);
+	}
 
 	public int getQuestionId() {
 		return questionId;
@@ -12,14 +16,6 @@ public class AnswerDefinition {
 	
 	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public float getCost() {

@@ -1,25 +1,8 @@
 package com.sps.model;
 
-public class Question {
-	private int id;
-	private String name;
-	
-	public int getId() {
-		return id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return new StringBuilder()
-			.append("name [").append(name).append("]")
-			.toString();
+public class Question extends NerdvanaModel {
+	public Question() {}
+	public Question(Integer id, String name) {
+		super(id, name);
 	}
 }

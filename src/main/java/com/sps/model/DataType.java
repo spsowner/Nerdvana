@@ -1,20 +1,11 @@
 package com.sps.model;
 
-public class DataType {
-	private int id;
-	private String name;
+public class DataType extends NerdvanaModel {
 	private String description;
 	
-	public int getId() {
-		return id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public DataType() {}
+	public DataType(Integer id, String name) {
+		super(id, name);
 	}
 
 	public String getDescription() {
@@ -28,7 +19,9 @@ public class DataType {
 	@Override
 	public String toString() {
 		return new StringBuilder()
-			.append("name [").append(name).append("]")
+			.append("id [").append(getId()).append("], ")
+			.append("name [").append(getName()).append("], ")
+			.append("description [").append(description).append("]")
 			.toString();
 	}
 }

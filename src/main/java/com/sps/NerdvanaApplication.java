@@ -2,14 +2,13 @@ package com.sps;
 
 import java.util.Arrays;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.event.ContextRefreshedEvent;
 
-import com.sps.model.NerdvanaDao;
+import com.sps.dao.NerdvanaDao;
 import com.sps.util.LogUtil;
 import com.sps.util.SystemOutLogger;
 
@@ -17,7 +16,6 @@ import com.sps.util.SystemOutLogger;
  * Configures the application.
  */
 @Configuration
-@EnableAutoConfiguration
 @PropertySource(value = {"classpath:/nerdvana.properties", "classpath:/override.properties"})
 public class NerdvanaApplication implements ApplicationListener<ContextRefreshedEvent> {
 	/*

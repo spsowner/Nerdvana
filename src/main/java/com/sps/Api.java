@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sps.dao.NerdvanaDao;
 import com.sps.model.AnswerDefinition;
-import com.sps.model.NerdvanaDao;
 
 @Controller
 @RequestMapping(value = "api/v1")
@@ -24,12 +24,12 @@ public class Api {
 	
 	@RequestMapping(value = "/questions", method = RequestMethod.GET)
 	public String questions() {
-		return new Gson().toJson(dao.getQuestions());
+		return dao.getQuestionsAsJson();
 	}
 	
 	@RequestMapping(value = "/data-types", method = RequestMethod.GET)
 	public String dataTypes() {
-		return new Gson().toJson(dao.getDataTypes());
+		return dao.getDataTypesAsJson();
 	}
 	
 	@RequestMapping(value = "/answer-definitions", method = RequestMethod.POST)

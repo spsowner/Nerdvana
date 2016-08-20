@@ -38,7 +38,7 @@
 		<property name="ignoreUnresolvablePlaceholders" value="false"/>
 	</bean>
 	
-	<import resource="classpath:spring/security-config.xml" />
+	<!-- import resource="classpath:spring/security-config.xml" / -->
 	
 	<!-- context:annotation-config / -->
 
@@ -50,5 +50,5 @@
     </bean>
 	<!--	note: all beans in base package com.sps are auto-scanned
 			and don't need to be declared here -->
-    <bean class="com.sps.model.NerdvanaDao" />
+    <bean class="com.sps.dao.NerdvanaDao" />
 </beans>
