@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>API Demo</title>
+        <script>
+        function getData(url, callback) {
+            var xhttp = new XMLHttpRequest();
+            var async = true;
+            xhttp.onreadystatechange = function() {
+            	switch(xhttp.readyState) {
+            		case 4:
+            			switch(xhttp.status) {
+			            	case 200:
+			            		callback(JSON.parse(xhttp.responseText));
+			            		break;
+			            	default:
+			            		throw new Error('Status [' + xhttp.status + '] for url [' + url + '].');
+            			}
+            			break;
+	            }
+            };
+            xhttp.open('GET', url, async);
+            xhttp.send();
+        }
+        
+        getData('/api/v1/questions', function(json) {
+        	console.log('questions', json);
+        });
+        </script>
+    </head>
+    <body></body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/
+http://logback.qos.ch/recipes/emailPerTransaction.html
+-->
+<configuration scan="true" scanPeriod="30 seconds" debug="true">
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+	
+	<property name="LOG_BASE_DIR" value="${app.log.dir}" />
+	<property name="LOG_BASE_FILE" value="nerdvana" />
+	<property name="FORMAT" value="%-5level %logger{0} %t - %msg%n"/>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <!-- jmxConfigurator/-->
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${FORMAT}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<file>${LOG_BASE_DIR}/${LOG_BASE_FILE}.log</file>
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    		<!-- daily rollover -->
+    		<fileNamePattern>${LOG_BASE_DIR}/archives/${LOG_BASE_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+    		
+    		<!-- keep 30 days' worth of history -->
+    		<maxHistory>30</maxHistory>
+    	</rollingPolicy>
+    	<encoder>
+    		<pattern>%date ${FORMAT}</pattern>
+    	</encoder>
+    </appender>
+    
+    <!-- appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        	<level>ERROR</level>
+    	</filter>
+    	<smtpHost>localhost</smtpHost>
+    	<smtpPort>25</smtpPort>
+    	<STARTTLS>true</STARTTLS>
+    	<to>error@nerdvana.com</to>
+    	<from>developer@nerdvana.com</from>
+    	<subject>Error from Nerdvana</subject>
+    	<layout class="ch.qos.logback.classic.PatternLayout">
+    		<pattern>%date ${FORMAT}</pattern>
+    	</layout>
+    </appender -->
+	
+    <root level="warn">
+        <!-- appender-ref ref="console"/ -->
+        <appender-ref ref="file"/>
+        <!-- appender-ref ref="email" / -->
+    </root>
+    
+	<logger name="com.sts" level="debug"/>
+	<!-- logger name="org.springframework.core" level="info"/>
+	<logger name="org.springframework.web" level="info"/>
+	<logger name="org.springframework.web.servlet" level="info"/>
+	<logger name="org.springframework.beans" level="warn"/>
+	<logger name="org.springframework.context" level="info"/ -->
+</configuration>
