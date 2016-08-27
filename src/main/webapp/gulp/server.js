@@ -15,8 +15,8 @@ var normalize = require('normalize');
 var httpProxy = require('http-proxy');
 
 var paths = {
-    src: path.resolve(__dirname, '../js'),
-    dest: path.resolve(__dirname, '../build')
+    src: path.resolve(__dirname, '../src/js'),
+    dest: path.resolve(__dirname, '../dist')
 };
 
 var $ = require('gulp-load-plugins')({
@@ -73,7 +73,7 @@ gulp.task('js-watch', ['js'], function() {
 
 // Local styles
 gulp.task('styles:local', function() {
-    return gulp.src(['./styles/main.styl'])
+    return gulp.src(['./src/styles/main.styl'])
         .pipe(plumber())
         .pipe($.sourcemaps.init())
         .pipe($.stylus({
@@ -91,10 +91,10 @@ gulp.task('watch', function() {
     gulp.watch('index.html', ['bs-reload']);
 
     // Watch JS
-    gulp.watch('./js/**/*.js', ['js-watch']);
+    gulp.watch('./src/js/**/*.js', ['js-watch']);
 
     // Watch Stylus
-    gulp.watch('./styles/**/*.styl', ['styles:local']);
+    gulp.watch('./src/styles/**/*.styl', ['styles:local']);
 });
 
 // Serve

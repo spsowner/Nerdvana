@@ -23,13 +23,16 @@ What happens when a Buddhist becomes totally absorbed with the computer he is wo
 6. `cd /vagrant`
     
     Go to the `/vagrant` directory. This is directory is synced to your computer's Nerdvana directory.
-7. Run `npm install`
+7. `cd /src/main/webapp`
+
+    This is where the main front end application lives.
+8. Run `npm install`
     
     This will install all the node.js dependencies.
-8. `gulp serve`
+9. `gulp serve`
     
     This will get the front end running
-9. The app should be running at [http://localhost:3000](http://localhost:3000) in your browser
+10. The app should be running at [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Launch the backend server
 
@@ -52,20 +55,6 @@ Instead of running from the Terminal, you can launch the backend server within t
 6. Once your Nerdvana is successfully imported, you may click on "nerdvana".
 7. Run the project either from the top nav, or the run button. Choose "Run as > Spring Boot Application".
 8. This comand runs `main()` from `src/main/java/com/sps/NerdvanaApplication.java`. You should see the application running from the console.
-
-_Troubleshooting_
-
-An error you may encounter when running from the IDE is that the `@Data` Lombok Annotations are not being picked up. These annotations automatically generate the getters and setters we need. Without them the code will not run correctly. If this is occurring, you will need to explicitly add the Lombok jar to your build path, even though Maven should have done this for you since it's added to the `pom.xml`.
-
-1. Download the [lombok jar](https://projectlombok.org/download.html).
-2. Double click on the jar once downloaded to install.
-3. Right click on your project, select Build Path > Configure Build Path.
-4. Click Add Variable, then Configure Variables, then New Variable.
-5. In the window, type `LOMBOK_JAR` for the name and click File to find the path to the lombak jar.
-6. Click Ok. `LOMBOK_JAR` should be available for your to select as an option for Classpath Variables.
-7. Select your newly added `LOMBOK_JAR` variable to add to the class path. 
-8. Click ok.
-9. Once added, make sure you click Apply.
 
 #### Verify the Back End is Running
 
