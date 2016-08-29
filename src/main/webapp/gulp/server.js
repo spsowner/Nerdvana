@@ -3,7 +3,6 @@
 var path = require('path');
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
-var path = require('path');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var webpack = require('webpack-stream');
