@@ -1,5 +1,6 @@
-import AppDispatcher from '../dispatcher/AppDispatcher';
 import {EventEmitter} from 'events';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import QuestionConstants from '../constants/QuestionConstants';
 
 const CHANGE_EVENT = 'change';
 
@@ -43,9 +44,13 @@ class QuestionStore extends EventEmitter {
         super();
 
         AppDispatcher.register((payload) => {
-            var { name, id, actionType } = payload.action;
+            var { name, id, actionType, questions } = payload.action;
 
             switch (actionType) {
+                case QuestionConstants.RECEIVE_QUESTIONS:
+                    this.addQuestions(questions);
+                    this.emitChange();
+                    break;
                 default:
                     // do nothing
             }

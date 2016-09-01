@@ -27,7 +27,13 @@ const QuestionConstants = {
      * Select question
      * @type {String}
      */
-    SELECT_QUESTION: 'SELECT_QUESTION'
+    SELECT_QUESTION: 'SELECT_QUESTION',
+
+    /**
+     * Receive questions from server
+     * @type {String}
+     */
+    RECEIVE_QUESTIONS: 'RECEIVE_QUESTIONS'
 };
 
 export default QuestionConstants;
