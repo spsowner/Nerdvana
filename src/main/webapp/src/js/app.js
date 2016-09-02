@@ -4,6 +4,7 @@ import ReactDom from 'react-dom';
 import {Router, Route, IndexRoute, useRouterHistory} from 'react-router';
 import {createHashHistory} from 'history';
 import AppBar from 'material-ui/lib/app-bar';
+import ApiUtils from './utils/ApiUtils';
 import NewQuestion from './components/pages/NewQuestion';
 import EnterSomeAnswers from './components/pages/EnterSomeAnswers';
 import Criteria from './components/pages/Criteria';
@@ -15,6 +16,8 @@ import SignUp from './components/pages/SignUp';
 // Needed for onTouchTap
 // Can go away when react 1.0 release
 injectTapEventPlugin();
+
+ApiUtils.getAllQuestions();
 
 const App = React.createClass({
 

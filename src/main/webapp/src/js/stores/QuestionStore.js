@@ -1,23 +1,23 @@
 import {EventEmitter} from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import QuestionConstants from '../constants/QuestionConstants';
+import unionBy from 'lodash/unionBy';
+import find from 'lodash/find';
 
 const CHANGE_EVENT = 'change';
 
-var _questions = {};
+var _questions = [];
 
 var Question = {
 
+    currentId: null,
+
     addQuestions(questions) {
-        questions.forEach((question) => {
-            if (!_questions[question.id]) {
-                _questions[question.id] = question;
-            }
-        });
+        _questions = unionBy(_questions, questions, 'id');
     },
 
     get(id) {
-        return _questions[id];
+        return find(_questions, ['id', id]);
     },
 
     getAll() {
@@ -44,13 +44,15 @@ class QuestionStore extends EventEmitter {
         super();
 
         AppDispatcher.register((payload) => {
-            var { name, id, actionType, questions } = payload.action;
 
-            switch (actionType) {
+            switch (payload.actionType) {
                 case QuestionConstants.RECEIVE_QUESTIONS:
-                    this.addQuestions(questions);
+                    Question.addQuestions(payload.questions);
                     this.emitChange();
                     break;
+                case QuestionConstants.SELECT_QUESTION:
+                    Question.currentId = payload.id;
+                    this.emitChange();
                 default:
                     // do nothing
             }
@@ -59,6 +61,14 @@ class QuestionStore extends EventEmitter {
 
     getQuestions() {
         return Question.getAll();
+    }
+
+    getQuestion(id) {
+        return Question.get(id);
+    }
+
+    getCurrent() {
+        return Question.get(Question.currentId);
     }
 
     emitChange() {

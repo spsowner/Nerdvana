@@ -14,6 +14,9 @@ var ApiUtils = {
         var MOCK_DATA = [{
             id: 1,
             name: 'What projects should we do this year?'
+        }, {
+            id: 2,
+            name: 'Sample Question'
         }];
 
         ServerActions.receiveQuestions(MOCK_DATA);

@@ -13,7 +13,7 @@ var QuestionActions = {
      * @param  {String} name
      */
     create(name) {
-        AppDispatcher.handleViewActions({
+        AppDispatcher.dispatch({
             actionType: QuestionConstants.CREATE,
             name: name
         });
@@ -25,7 +25,7 @@ var QuestionActions = {
      * @param  {String} name
      */
     update(id, name) {
-        AppDispatcher.handleViewActions({
+        AppDispatcher.dispatch({
             actionType: QuestionConstants.UPDATE,
             name: name,
             id: id
@@ -37,7 +37,7 @@ var QuestionActions = {
      * @param  {String} id
      */
     destroy(id) {
-        AppDispatcher.handleViewActions({
+        AppDispatcher.dispatch({
             actionType: QuestionConstants.DESTROY,
             id: id
         });
@@ -48,7 +48,7 @@ var QuestionActions = {
      * @param {String} id
      */
     selectQuestion(id) {
-        AppDispatcher.handleViewActions({
+        AppDispatcher.dispatch({
             actionType: QuestionConstants.SELECT_QUESTION,
             id: id
         });
